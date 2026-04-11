@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Predicción de Churn | Sebastian Flores</title>
+
+  <style>
+    :root{
+      --bg: #060b16;
+      --bg-soft: #0b1220;
+      --card: rgba(14, 22, 40, 0.92);
+      --card-2: rgba(10, 18, 34, 0.92);
+      --text: #f5f7fb;
+      --muted: #aab4c8;
+      --line: rgba(255,255,255,0.08);
+      --blue: #2f6bff;
+      --blue-2: #4f83ff;
+      --chip: rgba(255,255,255,0.06);
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --container: 1180px;
+    }
+
+    *{
+      box-sizing: border-box;
+    }
+
+    html{
+      scroll-behavior: smooth;
+    }
+
+    body{
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(47,107,255,0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.06), transparent 22%),
+        linear-gradient(180deg, #050a14 0%, #060b16 55%, #08101d 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a{
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img{
+      max-width: 100%;
+      display: block;
+    }
+
+    .container{
+      width: min(100% - 40px, var(--container));
+      margin-inline: auto;
+    }
+
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(5, 10, 20, 0.74);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar__inner{
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 1.12rem;
+    }
+
+    .brand-dot{
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: #ffffff;
+      box-shadow: 0 0 18px rgba(255,255,255,0.45);
+      flex-shrink: 0;
+    }
+
+    .nav-actions{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      font-weight: 600;
+      transition: 0.25s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+    }
+
+    .btn--primary{
+      background: linear-gradient(180deg, var(--blue-2), var(--blue));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 10px 30px rgba(47,107,255,0.28);
+    }
+
+    .btn--ghost{
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+    }
+
+    .hero{
+      padding: 70px 0 30px;
+    }
+
+    .hero-card{
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(16,24,43,0.96), rgba(9,15,28,0.96));
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 48px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card::before{
+      content: "";
+      position: absolute;
+      inset: auto -80px -100px auto;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(47,107,255,0.20), transparent 65%);
+      pointer-events: none;
+    }
+
+    .eyebrow{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #c9d4e8;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before{
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+    }
+
+    .hero-grid{
+      display: grid;
+      grid-template-columns: 1.5fr 0.95fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .hero h1{
+      margin: 0 0 18px;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      max-width: 760px;
+    }
+
+    .hero-lead{
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 760px;
+    }
+
+    .tags{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .tag{
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid var(--line);
+      color: #e8eefb;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .hero-actions{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-side{
+      display: grid;
+      gap: 16px;
+    }
+
+    .mini-card{
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .mini-card h3{
+      margin: 0 0 8px;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .mini-card p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .section{
+      padding: 26px 0;
+    }
+
+    .section-title{
+      margin: 0 0 18px;
+      font-size: clamp(1.4rem, 2vw, 1.85rem);
+      letter-spacing: -0.03em;
+    }
+
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 22px;
+    }
+
+    .card{
+      grid-column: span 12;
+      background: linear-gradient(180deg, rgba(14,22,40,0.95), rgba(10,17,31,0.95));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .card p:last-child,
+    .card ul:last-child{
+      margin-bottom: 0;
+    }
+
+    .card--half{
+      grid-column: span 6;
+    }
+
+    .card--third{
+      grid-column: span 4;
+    }
+
+    .label{
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(47,107,255,0.12);
+      border: 1px solid rgba(47,107,255,0.22);
+      color: #dbe7ff;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .card h2,
+    .card h3{
+      margin: 0 0 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .card p{
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+
+    .card ul{
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .card li + li{
+      margin-top: 10px;
+    }
+
+    .kpi-row{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .kpi{
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+    }
+
+    .kpi span{
+      display: block;
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .kpi strong{
+      display: block;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .timeline{
+      display: grid;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .timeline-item{
+      padding: 18px 18px 18px 20px;
+      border-left: 2px solid rgba(47,107,255,0.55);
+      background: rgba(255,255,255,0.025);
+      border-radius: 0 18px 18px 0;
+    }
+
+    .timeline-item h4{
+      margin: 0 0 8px;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .timeline-item p{
+      margin: 0;
+    }
+
+    .highlight-list{
+      display: grid;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .highlight{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.025);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .highlight strong{
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-box{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      flex-wrap: wrap;
+      background: linear-gradient(180deg, rgba(15,25,47,0.96), rgba(11,18,34,0.96));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2{
+      margin: 0 0 8px;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .cta-box p{
+      margin: 0;
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    .cta-actions{
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer{
+      padding: 35px 0 50px;
+      color: #8f9db5;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1080px){
+      .hero-grid{
+        grid-template-columns: 1fr;
+      }
+
+      .card--half,
+      .card--third{
+        grid-column: span 12;
+      }
+
+      .kpi-row{
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px){
+      .topbar__inner{
+        min-height: 74px;
+      }
+
+      .hero{
+        padding-top: 40px;
+      }
+
+      .hero-card{
+        padding: 26px;
+        border-radius: 24px;
+      }
+
+      .card{
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .kpi-row{
+        grid-template-columns: 1fr;
+      }
+
+      .btn{
+        width: 100%;
+      }
+
+      .nav-actions,
+      .hero-actions,
+      .cta-actions{
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a href="./index.html" class="brand">
+        <span class="brand-dot"></span>
+        <span>Sebastian Flores</span>
+      </a>
+
+      <div class="nav-actions">
+        <a href="./index.html#projects" class="btn btn--ghost">← Volver a proyectos</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <span class="eyebrow">Caso de negocio · Machine Learning + BI</span>
+
+          <div class="hero-grid">
+            <div>
+              <h1>Predicción de Churn</h1>
+
+              <p class="hero-lead">
+                Proyecto analítico orientado a identificar clientes con mayor riesgo de abandono,
+                priorizar acciones de retención y traducir los resultados del modelo en decisiones
+                de negocio más claras y accionables.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Pandas</span>
+                <span class="tag">Scikit-learn</span>
+                <span class="tag">Power BI</span>
+                <span class="tag">SQL</span>
+                <span class="tag">Machine Learning</span>
+              </div>
+
+              <div class="hero-actions">
+                <a class="btn btn--primary" href="https://app.powerbi.com/view?r=eyJrIjoiZjBmZjNiMGUtZjA1YS00NDdhLTg4NTItNzIwOTMzMmQ2ZTRhIiwidCI6IjRiMmFlNTExLTEyYjgtNDg0NC05MTM2LWNiMTA3MDMxNjY0MSJ9" target="_blank" rel="noreferrer">
+                  Ver dashboard
+                </a>
+                <a class="btn btn--ghost"
+                 href="https://github.com/sebastianflores-data/churn-prediction-analysis/blob/main/projects/churn/churn-prediction-analysis%20(1).ipynb"
+                 target="_blank" 
+                 rel="noreferrer">
+                  Ver código
+                </a>
+                <a class="btn btn--ghost" href="./index.html#projects">
+                  Volver al portfolio
+                </a>
+              </div>
+            </div>
+
+            <div class="hero-side">
+              <div class="mini-card">
+                <h3>Objetivo del caso</h3>
+                <p>
+                  Detectar clientes con alta probabilidad de abandono para ayudar al negocio
+                  a enfocar sus esfuerzos comerciales y de retención.
+                </p>
+              </div>
+
+              <div class="mini-card">
+                <h3>Entregables</h3>
+                <p>
+                  Modelo predictivo, análisis exploratorio, segmentación de riesgo y dashboard
+                  ejecutivo con KPIs e insights accionables.
+                </p>
+              </div>
+
+              <div class="mini-card">
+                <h3>Valor para negocio</h3>
+                <p>
+                  Permite pasar de una gestión reactiva a una estrategia preventiva sobre clientes
+                  críticos, con mejor priorización y seguimiento.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card">
+          <span class="label">Resumen ejecutivo</span>
+          <h2 class="section-title">Visión general del proyecto</h2>
+          <p>
+            Este caso se desarrolló con el objetivo de predecir la fuga de clientes y transformar
+            esa predicción en una herramienta útil para el negocio. A partir de datos históricos
+            de comportamiento, permanencia, consumo y relación con el servicio, se construyó un
+            modelo capaz de estimar la probabilidad de abandono y clasificar a los clientes según
+            su nivel de riesgo.
+          </p>
+          <p>
+            Además del modelado, se diseñó una capa de visualización orientada a negocio mediante
+            un dashboard que permite monitorear KPIs, identificar segmentos vulnerables y priorizar
+            acciones de retención con mayor impacto potencial.
+          </p>
+
+          <div class="kpi-row">
+            <div class="kpi">
+              <span>Enfoque</span>
+              <strong>Predicción + decisión</strong>
+            </div>
+            <div class="kpi">
+              <span>Tipo de problema</span>
+              <strong>Clasificación binaria</strong>
+            </div>
+            <div class="kpi">
+              <span>Salida principal</span>
+              <strong>Probabilidad de churn</strong>
+            </div>
+            <div class="kpi">
+              <span>Uso final</span>
+              <strong>Retención comercial</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid">
+          <article class="card card--half">
+            <span class="label">Problema</span>
+            <h2>Problema de negocio</h2>
+            <p>
+              La pérdida de clientes impacta directamente en ingresos, estabilidad comercial y costo
+              de adquisición. En muchos negocios, el churn se detecta demasiado tarde, cuando el
+              cliente ya redujo su actividad o decidió abandonar el servicio.
+            </p>
+            <p>
+              El reto consistía en anticipar ese comportamiento para que el negocio pudiera actuar
+              antes, identificar perfiles más sensibles y asignar recursos de retención con criterio.
+            </p>
+          </article>
+
+          <article class="card card--half">
+            <span class="label">Objetivo</span>
+            <h2>Pregunta analítica</h2>
+            <p>
+              ¿Qué clientes presentan mayor probabilidad de abandono y qué variables parecen explicar
+              mejor ese riesgo?
+            </p>
+            <p>
+              La meta fue construir un flujo que no solo predijera churn, sino que también facilitara
+              su interpretación para equipos no técnicos mediante un dashboard claro y accionable.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card">
+          <span class="label">Datos</span>
+          <h2 class="section-title">Datos disponibles y preparación</h2>
+          <p>
+            El análisis se apoyó en una base de clientes con variables demográficas, contractuales
+            y de comportamiento. Entre las más relevantes se incluyeron antigüedad, tipo de contrato,
+            gasto mensual, gasto acumulado, uso de servicios, historial de permanencia y estado final
+            del cliente respecto al abandono.
+          </p>
+
+          <div class="grid" style="margin-top: 10px;">
+            <div class="card card--third" style="box-shadow:none;">
+              <h3>Variables principales</h3>
+              <ul>
+                <li>Antigüedad del cliente</li>
+                <li>Tipo de contrato</li>
+                <li>Gasto mensual y total</li>
+                <li>Servicios contratados</li>
+                <li>Estado de churn</li>
+              </ul>
+            </div>
+
+            <div class="card card--third" style="box-shadow:none;">
+              <h3>Trabajo de calidad de datos</h3>
+              <ul>
+                <li>Limpieza de nulos y formatos</li>
+                <li>Normalización de columnas</li>
+                <li>Conversión de tipos</li>
+                <li>Codificación de variables categóricas</li>
+                <li>Revisión de consistencia lógica</li>
+              </ul>
+            </div>
+
+            <div class="card card--third" style="box-shadow:none;">
+              <h3>Resultado de preparación</h3>
+              <ul>
+                <li>Dataset listo para modelado</li>
+                <li>Variables explicativas depuradas</li>
+                <li>Target definido correctamente</li>
+                <li>Base exportable a BI</li>
+                <li>Lectura clara para negocio</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card">
+          <span class="label">Metodología</span>
+          <h2 class="section-title">Proceso analítico aplicado</h2>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <h4>1. Limpieza y entendimiento del dataset</h4>
+              <p>
+                Se revisó la estructura general de la base, presencia de valores faltantes,
+                distribución de variables y consistencia del objetivo de churn.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h4>2. Análisis exploratorio</h4>
+              <p>
+                Se estudiaron patrones iniciales para detectar relaciones entre abandono y variables
+                como antigüedad, gasto, contrato y servicios utilizados.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h4>3. Preparación para modelado</h4>
+              <p>
+                Se realizó transformación de variables, encoding, separación de features y target,
+                y partición entre entrenamiento y prueba.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h4>4. Entrenamiento y evaluación del modelo</h4>
+              <p>
+                Se aplicó un enfoque de clasificación supervisada para estimar la probabilidad de
+                churn y medir desempeño mediante métricas de evaluación adecuadas.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <h4>5. Traducción del resultado a negocio</h4>
+              <p>
+                El score predictivo se integró a una capa visual de Power BI para facilitar lectura,
+                segmentación de riesgo y monitoreo ejecutivo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid">
+          <article class="card card--half">
+            <span class="label">Hallazgos</span>
+            <h2>Principales insights</h2>
+
+            <div class="highlight-list">
+              <div class="highlight">
+                <strong>Clientes con menor antigüedad muestran mayor riesgo</strong>
+                <p>
+                  Los primeros meses de relación resultan críticos para la permanencia, lo que sugiere
+                  reforzar onboarding y seguimiento temprano.
+                </p>
+              </div>
+
+              <div class="highlight">
+                <strong>El tipo de contrato influye fuertemente en el churn</strong>
+                <p>
+                  Es esperable que contratos más flexibles o de menor compromiso presenten mayor fuga.
+                </p>
+              </div>
+
+              <div class="highlight">
+                <strong>El score predictivo ayuda a priorizar mejor</strong>
+                <p>
+                  No todos los clientes deben recibir el mismo esfuerzo; el modelo permite ordenar
+                  foco comercial según riesgo esperado.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card card--half">
+            <span class="label">Impacto</span>
+            <h2>Recomendaciones para el negocio</h2>
+
+            <div class="highlight-list">
+              <div class="highlight">
+                <strong>Diseñar campañas de retención por nivel de riesgo</strong>
+                <p>
+                  Separar acciones para clientes de riesgo alto, medio y bajo mejora la eficiencia
+                  del equipo comercial y del presupuesto.
+                </p>
+              </div>
+
+              <div class="highlight">
+                <strong>Refuerzo durante el ciclo inicial del cliente</strong>
+                <p>
+                  El onboarding y la experiencia temprana deben convertirse en una etapa prioritaria
+                  de seguimiento y acompañamiento.
+                </p>
+              </div>
+
+              <div class="highlight">
+                <strong>Monitoreo continuo en dashboard</strong>
+                <p>
+                  La predicción gana valor cuando se vuelve operativa: seguimiento periódico,
+                  segmentación y revisión de KPIs de abandono.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid">
+          <article class="card card--half">
+            <span class="label">Evaluación</span>
+            <h2>Resultado final del caso</h2>
+            <p>
+              El proyecto permitió construir una solución completa: desde el tratamiento del dato
+              y entrenamiento del modelo, hasta la traducción de resultados a una interfaz ejecutiva
+              entendible para negocio.
+            </p>
+            <p>
+              Más allá de la precisión del modelo, el valor principal estuvo en convertir una salida
+              técnica en una herramienta de priorización comercial, facilitando decisiones concretas
+              sobre retención y seguimiento.
+            </p>
+          </article>
+
+          <article class="card card--half">
+            <span class="label">Mejora futura</span>
+            <h2>Limitaciones y próximos pasos</h2>
+            <ul>
+              <li>Incorporar variables de interacción comercial o marketing.</li>
+              <li>Probar nuevos modelos y ajuste de hiperparámetros.</li>
+              <li>Agregar seguimiento temporal del churn por cohortes.</li>
+              <li>Evaluar costo-beneficio de campañas de retención por segmento.</li>
+              <li>Actualizar periódicamente el modelo con datos nuevos.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 12px; padding-bottom: 60px;">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <h2>Explorar entregables del proyecto</h2>
+            <p>
+              Podés revisar la capa visual del caso en el dashboard o entrar al repositorio para ver
+              el flujo técnico, la preparación de datos y la lógica del modelo predictivo.
+            </p>
+          </div>
+
+          <div class="cta-actions">
+            <a class="btn btn--primary" href="https://app.powerbi.com/view?r=eyJrIjoiZjBmZjNiMGUtZjA1YS00NDdhLTg4NTItNzIwOTMzMmQ2ZTRhIiwidCI6IjRiMmFlNTExLTEyYjgtNDg0NC05MTM2LWNiMTA3MDMxNjY0MSJ9" target="_blank" rel="noreferrer">
+              Abrir dashboard
+            </a>
+            <a class="btn btn--ghost" href="https://github.com/" target="_blank" rel="noreferrer">
+              Ver repositorio
+            </a>
+            <a class="btn btn--ghost" href="./index.html#projects">
+              Volver
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> Sebastian Flores · Caso de estudio de Predicción de Churn
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

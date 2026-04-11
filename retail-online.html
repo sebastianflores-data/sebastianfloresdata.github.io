@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retail Online | Caso de negocio</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body class="retail-case-page">
+
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a href="./index.html" class="brand">Sebastian Flores</a>
+
+      <a href="./index.html#projects" class="back-link">
+        ← Volver a proyectos
+      </a>
+    </div>
+  </header>
+
+  <main class="retail-case">
+
+    <!-- HERO -->
+    <section class="retail-hero">
+      <div class="container retail-hero__grid">
+
+        <div class="retail-hero__content">
+          <p class="section-kicker">Caso de negocio · Data Analysis + BI</p>
+
+          <h1>Retail Online</h1>
+
+          <p class="retail-lead">
+            Proyecto analítico enfocado en evaluar el desempeño comercial de un negocio de retail online,
+            identificar patrones de facturación, concentración de clientes y productos clave, y traducir
+            los datos en un dashboard ejecutivo orientado a la toma de decisiones.
+          </p>
+
+          <div class="stack-chips">
+            <span>Python</span>
+            <span>Pandas</span>
+            <span>Power BI</span>
+            <span>DAX</span>
+            <span>Excel</span>
+            <span>Business Analysis</span>
+          </div>
+
+          <div class="retail-hero__actions">
+            <a class="btn btn--primary"
+             href="https://app.powerbi.com/view?r=eyJrIjoiYzkwYmY0ZGEtZmM4ZS00MDFiLThkYWItMWE2OTUzZDgyNTAwIiwidCI6IjRiMmFlNTExLTEyYjgtNDg0NC05MTM2LWNiMTA3MDMxNjY0MSJ9"
+              target="_blank" 
+              rel="noreferrer">
+              Ver dashboard
+            </a>
+            <a class="btn btn--ghost" 
+            href="https://github.com/sebastianflores-data/retail-online-analysis/blob/main/notebook/retail-online.ipynb"
+             target="_blank" 
+             rel="noreferrer">
+              Ver código
+            </a>
+            <a class="btn btn--ghost" href="./index.html#projects">
+              Volver al portfolio
+            </a>
+          </div>
+        </div>
+
+        <div class="retail-hero__panel">
+          <div class="info-box">
+            <h3>Problema de negocio</h3>
+            <p>
+              La empresa necesitaba mayor visibilidad sobre facturación, devoluciones, clientes de alto valor,
+              productos más relevantes y comportamiento temporal de las ventas.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3>Resultado</h3>
+            <p>
+              Se construyó un caso completo de análisis: limpieza, transformación, KPIs e interpretación de hallazgos,
+              culminando en un dashboard ejecutivo para seguimiento comercial.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- KPI STRIP -->
+    <section class="retail-kpis">
+      <div class="container">
+        <div class="retail-kpi-grid">
+          <article class="retail-kpi-card">
+            <span class="retail-kpi-label">Ingresos brutos</span>
+            <strong>$8,91 M</strong>
+          </article>
+
+          <article class="retail-kpi-card">
+            <span class="retail-kpi-label">Ingresos netos</span>
+            <strong>$8,30 M</strong>
+          </article>
+
+          <article class="retail-kpi-card">
+            <span class="retail-kpi-label">Transacciones</span>
+            <strong>18.532</strong>
+          </article>
+
+          <article class="retail-kpi-card">
+            <span class="retail-kpi-label">Clientes activos</span>
+            <strong>4.373</strong>
+          </article>
+
+          <article class="retail-kpi-card">
+            <span class="retail-kpi-label">Ticket promedio</span>
+            <strong>$480,87</strong>
+          </article>
+
+          <article class="retail-kpi-card retail-kpi-card--accent">
+            <span class="retail-kpi-label">Impacto devoluciones</span>
+            <strong>$-611,3K</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMEN EJECUTIVO -->
+    <section class="retail-section">
+      <div class="container">
+        <div class="retail-section__header">
+          <p class="section-kicker">Resumen ejecutivo</p>
+          <h2>Qué resuelve este proyecto</h2>
+        </div>
+
+        <div class="retail-summary-grid">
+          <article class="summary-card">
+            <h3>Objetivo</h3>
+            <p>
+              Evaluar el rendimiento comercial del negocio a partir de transacciones reales,
+              cuantificar el efecto de devoluciones y detectar patrones de facturación por producto,
+              cliente, país y período.
+            </p>
+          </article>
+
+          <article class="summary-card">
+            <h3>Enfoque</h3>
+            <p>
+              Se trabajó con limpieza de datos, segmentación entre ventas válidas y cancelaciones,
+              creación de variables de ingresos, análisis exploratorio y construcción de indicadores
+              ejecutivos orientados a negocio.
+            </p>
+          </article>
+
+          <article class="summary-card">
+            <h3>Salida final</h3>
+            <p>
+              Se observaron pequeñas diferencias entre KPIs debido a distintos niveles de agregación,
+               redondeo y tratamiento de devoluciones. Sin embargo, los valores están alineados
+                y son consistentes entre sí, lo que valida la correcta transformación del dataset 
+                y la coherencia del modelo analítico.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DATASET -->
+    <section class="retail-section retail-section--soft">
+      <div class="container">
+        <div class="retail-section__header">
+          <p class="section-kicker">Contexto del análisis</p>
+          <h2>Dataset y preparación</h2>
+        </div>
+
+        <div class="dataset-layout">
+          <div class="dataset-main-card">
+            <h3>Base analizada</h3>
+            <p>
+              El proyecto parte del dataset <strong>Online Retail</strong>, compuesto por transacciones de una empresa
+              del sector retail con operaciones principalmente B2C y pequeños mayoristas.
+            </p>
+
+            <p>
+              La base original contiene información sobre número de factura, código de producto,
+              descripción, cantidad, fecha, precio unitario, cliente y país.
+            </p>
+
+            <div class="dataset-stats">
+              <div>
+                <span>Registros originales</span>
+                <strong>541.909</strong>
+              </div>
+              <div>
+                <span>Registros analizados</span>
+                <strong>406.829</strong>
+              </div>
+              <div>
+                <span>Columnas base</span>
+                <strong>8</strong>
+              </div>
+              <div>
+                <span>Productos únicos</span>
+                <strong>3.665</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="dataset-side">
+            <article class="mini-panel">
+              <h3>Limpieza realizada</h3>
+              <ul>
+                <li>Eliminación de registros sin ID de cliente.</li>
+                <li>Conversión y estandarización de fechas.</li>
+                <li>Separación entre ventas válidas y cancelaciones.</li>
+                <li>Control de cantidades negativas y precios inválidos.</li>
+                <li>Creación de variable calculada de ingresos.</li>
+              </ul>
+            </article>
+
+            <article class="mini-panel">
+              <h3>Variables clave</h3>
+              <ul>
+                <li>Ingresos por transacción.</li>
+                <li>EsCancelada.</li>
+                <li>Año-Mes para análisis temporal.</li>
+                <li>Base de ventas válidas.</li>
+                <li>Base de devoluciones.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section class="retail-section">
+      <div class="container">
+        <div class="retail-section__header">
+          <p class="section-kicker">Mi proceso de trabajo</p>
+          <h2>Cómo estructuré el análisis</h2>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-card">
+            <span class="process-step">01</span>
+            <h3>Perfilado inicial</h3>
+            <p>
+              Revisión de estructura, tipos de datos, nulos, rangos, valores atípicos
+              y calidad general del dataset antes de construir cualquier KPI.
+            </p>
+          </article>
+
+          <article class="process-card">
+            <span class="process-step">02</span>
+            <h3>Limpieza y validación</h3>
+            <p>
+              Se eliminaron registros sin cliente y se distinguieron ventas válidas
+              de devoluciones o cancelaciones para no distorsionar los indicadores.
+            </p>
+          </article>
+
+          <article class="process-card">
+            <span class="process-step">03</span>
+            <h3>Ingeniería analítica</h3>
+            <p>
+              Creación de métricas de ingresos, preparación de variables temporales
+              y segmentación por cliente, país y producto.
+            </p>
+          </article>
+
+          <article class="process-card">
+            <span class="process-step">04</span>
+            <h3>Análisis exploratorio</h3>
+            <p>
+              Estudio de distribución de ingresos, concentración comercial,
+              comportamiento de cantidades y evolución mensual de la facturación.
+            </p>
+          </article>
+
+          <article class="process-card">
+            <span class="process-step">05</span>
+            <h3>KPIs de negocio</h3>
+            <p>
+              Diseño de métricas ejecutivas: ingresos brutos y netos, transacciones,
+              clientes activos, ticket promedio e ingreso por cliente.
+            </p>
+          </article>
+
+          <article class="process-card">
+            <span class="process-step">06</span>
+            <h3>Visualización final</h3>
+            <p>
+              Construcción de dashboard en Power BI orientado a lectura ejecutiva,
+              priorizando claridad visual, jerarquía de información y utilidad comercial.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section class="retail-section retail-section--soft">
+      <div class="container">
+        <div class="retail-section__header">
+          <p class="section-kicker">Dashboard</p>
+          <h2>Lectura visual del negocio</h2>
+        </div>
+
+        <div class="dashboard-showcase">
+          <div class="dashboard-image-card">
+            <img
+              src="./assets/img/retail-dashboard.png"
+              alt="Dashboard Retail Online"
+              class="dashboard-preview"
+            />
+          </div>
+
+          <div class="dashboard-text-card">
+            <h3>Qué muestra el panel</h3>
+            <p>
+              El dashboard resume en una sola vista el comportamiento comercial del negocio:
+              clientes activos, ingresos por cliente, facturación total, ticket medio,
+              top productos, top clientes, distribución geográfica y evolución por período.
+            </p>
+
+            <h3>Preguntas que responde</h3>
+            <ul>
+              <li>¿Qué tan grande es el negocio en ingresos y volumen?</li>
+              <li>¿Qué productos concentran mayor facturación?</li>
+              <li>¿Qué países explican la mayor parte del revenue?</li>
+              <li>¿Cómo evoluciona la facturación mes a mes?</li>
+              <li>¿Qué clientes tienen más peso comercial?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSIGHTS -->
+    <section class="retail-section">
+      <div class="container">
+        <div class="retail-section__header">
+          <p class="section-kicker">Hallazgos principales</p>
+          <h2>Insights obtenidos del análisis</h2>
+        </div>
+
+        <div class="insights-grid">
+          <article class="insight-card">
+            <h3>Concentración geográfica</h3>
+            <p>
+              United Kingdom concentra la mayor parte de la facturación, representando más del 80%
+              de los ingresos brutos observados, lo que revela una fuerte dependencia de un mercado principal.
+            </p>
+          </article>
+
+          <article class="insight-card">
+            <h3>Estacionalidad comercial</h3>
+            <p>
+              La evolución temporal muestra una tendencia creciente, con aceleración marcada hacia los últimos meses,
+              lo que sugiere estacionalidad y picos de demanda relevantes para planificación comercial.
+            </p>
+          </article>
+
+          <article class="insight-card">
+            <h3>Dependencia de pocos productos</h3>
+            <p>
+              Una parte reducida del catálogo concentra una proporción significativa de los ingresos,
+              señalando productos estrella y, al mismo tiempo, riesgo de concentración.
+            </p>
+          </article>
+
+          <article class="insight-card">
+            <h3>Impacto de devoluciones</h3>
+            <p>
+              Las devoluciones y cancelaciones reducen aproximadamente un 6,9% del ingreso bruto,
+              afectando el desempeño neto y justificando seguimiento específico sobre causas y categorías.
+            </p>
+          </article>
+
+          <article class="insight-card">
+            <h3>Clientes de alto valor</h3>
+            <p>
+              El revenue no está distribuido de forma homogénea: existe una concentración clara en ciertos clientes,
+              útil para estrategias de fidelización, account management y retención comercial.
+            </p>
+          </article>
+
+          <article class="insight-card">
+            <h3>Lectura ejecutiva</h3>
+            <p>
+              Los KPIs permiten diferenciar tamaño del negocio, eficiencia comercial y calidad del ingreso,
+              aportando una visión mucho más accionable que revisar transacciones aisladas.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACTO -->
+    <section class="retail-section retail-section--soft">
+      <div class="container">
+        <div class="retail-section__header">
+          <p class="section-kicker">Valor para negocio</p>
+          <h2>Qué decisiones habilita este caso</h2>
+        </div>
+
+        <div class="impact-grid">
+          <article class="impact-card">
+            <h3>Priorización comercial</h3>
+            <p>
+              Identificar mercados, clientes y productos de mayor contribución
+              para enfocar mejor campañas, promociones y esfuerzos de venta.
+            </p>
+          </article>
+
+          <article class="impact-card">
+            <h3>Gestión de devoluciones</h3>
+            <p>
+              Medir el peso económico de cancelaciones y devoluciones
+              para atacar pérdidas de forma concreta.
+            </p>
+          </article>
+
+          <article class="impact-card">
+            <h3>Planificación temporal</h3>
+            <p>
+              Detectar meses de mayor tracción comercial y anticipar necesidades
+              operativas, de inventario o marketing.
+            </p>
+          </article>
+
+          <article class="impact-card">
+            <h3>Seguimiento ejecutivo</h3>
+            <p>
+              Proveer un panel de lectura simple y clara para monitoreo frecuente,
+              sin depender de revisar tablas transaccionales en bruto.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK + ENTREGABLES -->
+    <section class="retail-section">
+      <div class="container">
+        <div class="deliverables-card">
+          <div class="deliverables-col">
+            <p class="section-kicker">Stack</p>
+            <h2>Herramientas utilizadas</h2>
+
+            <div class="stack-chips stack-chips--bottom">
+              <span>Python</span>
+              <span>Pandas</span>
+              <span>Matplotlib</span>
+              <span>Power BI</span>
+              <span>DAX</span>
+              <span>Excel</span>
+              <span>GitHub</span>
+            </div>
+          </div>
+
+          <div class="deliverables-col">
+            <p class="section-kicker">Entregables</p>
+            <h2>Accesos del proyecto</h2>
+
+            <div class="deliverables-actions">
+              <a class="btn btn--primary"
+               href="https://app.powerbi.com/view?r=eyJrIjoiYzkwYmY0ZGEtZmM4ZS00MDFiLThkYWItMWE2OTUzZDgyNTAwIiwidCI6IjRiMmFlNTExLTEyYjgtNDg0NC05MTM2LWNiMTA3MDMxNjY0MSJ9"
+                target="_blank" 
+                rel="noreferrer">
+                Abrir dashboard
+              </a>
+              <a class="btn btn--ghost"
+              href="https://github.com/sebastianflores-data/retail-online-analysis/blob/main/notebook/retail-online.ipynb" 
+              target="_blank" 
+              rel="noreferrer">
+                Abrir notebook
+              </a>
+              <a class="btn btn--ghost" href="./index.html#projects">
+                Volver al portfolio
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Superstore Sales Analysis | Sebastian Flores</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./index.html">Sebastian Flores</a>
+    <nav class="nav">
+      <a href="./index.html#about">Sobre mí</a>
+      <a href="./index.html#projects">Proyectos</a>
+      <a href="./index.html#contact">Contacto</a>
+    </nav>
+  </header>
+
+  <main class="project-page">
+  <section class="project-hero">
+  <div class="container hero-layout">
+
+    <!-- IZQUIERDA -->
+    <div class="hero-left">
+      <h1>Superstore Sales Analysis</h1>
+
+      <div class="hero-image">
+        <img src="./assets/img/superstore-dashboard.png" alt="Dashboard Superstore">
+      </div>
+    </div>
+
+    <!-- DERECHA -->
+    <div class="hero-right">
+      <p class="eyebrow">Proyecto 3 · SQL + Excel</p>
+
+      <p class="project-intro">
+        Análisis de ventas y rentabilidad desarrollado con SQL y Excel para identificar categorías, productos, regiones y segmentos con mayor impacto en el desempeño del negocio.
+      </p>
+
+      <div class="project-meta">
+        <span class="tag">SQL</span>
+        <span class="tag">Excel</span>
+        <span class="tag">Dashboard</span>
+        <span class="tag">KPIs</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <section class="project-section">
+      <div class="container">
+        <div class="project-grid-two">
+          <article class="case-card">
+            <h2>Contexto del negocio</h2>
+            <p>
+              La empresa necesitaba comprender con mayor claridad qué categorías, subcategorías,
+              regiones y productos impulsaban las ventas y cuáles estaban afectando la rentabilidad.
+              El objetivo fue transformar datos transaccionales en información útil para apoyar decisiones comerciales.
+            </p>
+          </article>
+
+          <article class="case-card">
+            <h2>Objetivo</h2>
+            <p>
+              Construir un análisis integral que permitiera evaluar desempeño comercial, rentabilidad,
+              comportamiento de clientes y eficiencia operativa, complementando el análisis técnico en SQL
+              con un dashboard ejecutivo en Excel.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section">
+      <div class="container">
+        <article class="case-card">
+          <h2>Dataset y variables analizadas</h2>
+          <p>
+            Se trabajó con un dataset de ventas retail con información sobre pedidos, fechas, clientes,
+            segmentos, categorías, subcategorías, productos, regiones, ventas, cantidad vendida,
+            ganancias, método de pago y modo de envío.
+          </p>
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <h3>Dimensiones</h3>
+              <ul>
+                <li>Cliente</li>
+                <li>Producto</li>
+                <li>Región</li>
+                <li>Tiempo</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>Métricas</h3>
+              <ul>
+                <li>Ventas</li>
+                <li>Ganancias</li>
+                <li>Cantidad</li>
+                <li>Margen %</li>
+              </ul>
+            </div>
+
+            <div class="mini-card">
+              <h3>Análisis operativo</h3>
+              <ul>
+                <li>Días de envío</li>
+                <li>Método de pago</li>
+                <li>Ship Mode</li>
+                <li>Pedidos</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="project-section">
+      <div class="container">
+        <article class="case-card">
+          <h2>Proceso de trabajo</h2>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="timeline-step">1</span>
+              <div>
+                <h3>Limpieza y validación</h3>
+                <p>
+                  Se revisó la estructura del dataset, el tipo de datos, el formato decimal entre SQL y Excel,
+                  la coherencia entre ventas y ganancias, y se generaron columnas auxiliares para el análisis.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-step">2</span>
+              <div>
+                <h3>Análisis exploratorio en SQL</h3>
+                <p>
+                  Se desarrollaron consultas para estudiar KPIs globales, rentabilidad por categoría y subcategoría,
+                  regiones más rentables, clientes con mayor aporte, segmentación comercial, métodos de pago,
+                  logística y concentración de ganancias.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-step">3</span>
+              <div>
+                <h3>Construcción de dashboard en Excel</h3>
+                <p>
+                  Se diseñó un dashboard interactivo con KPIs, tablas dinámicas, segmentadores y visualizaciones
+                  orientadas a toma de decisiones para un perfil ejecutivo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="project-section">
+      <div class="container">
+        <article class="case-card">
+          <h2>KPIs principales</h2>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <span class="kpi-label">Ventas Totales</span>
+              <strong>$1.56M</strong>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Ganancia Total</span>
+              <strong>$175K</strong>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Margen General</span>
+              <strong>11.2%</strong>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Pedidos</span>
+              <strong>5,901</strong>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Clientes</span>
+              <strong>773</strong>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Prom. Días de envío</span>
+              <strong>3.9</strong>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="project-section">
+      <div class="container">
+        <div class="project-grid-two">
+          <article class="case-card">
+            <h2>Hallazgos clave</h2>
+            <ul class="insight-list">
+                <li><strong>Technology</strong> se posiciona como el principal driver de rentabilidad, con márgenes significativamente superiores al resto del portafolio.</li>
+
+  <li><strong>Furniture</strong> presenta un alto volumen de ventas, pero con márgenes bajos o negativos, impactando directamente la rentabilidad global.</li>
+
+  <li>Subcategorías como <strong>Copiers</strong> concentran una proporción relevante de las ganancias, evidenciando una estructura de ingresos tipo Pareto.</li>
+
+  <li>Se identificaron productos con pérdidas recurrentes, lo que indica ineficiencias en pricing, costos o estrategia comercial.</li>
+
+  <li>La región <strong>West</strong> lidera tanto en ingresos como en ganancias, reflejando un desempeño comercial superior frente al resto de regiones.</li>
+            </ul>
+          </article>
+
+          <article class="case-card">
+            <h2>Insight estratégico</h2>
+               <li>El negocio está orientado al volumen, pero no maximiza la rentabilidad, lo que indica una oportunidad clara de optimización del margen.</li>
+
+  <li>La presencia de productos con pérdidas estructurales sugiere ineficiencias en pricing, costos o estrategia comercial.</li>
+
+  <li>La dependencia de una región principal expone al negocio a riesgos geográficos y limita su escalabilidad.</li>
+
+  <li>El mix de productos tiene un impacto directo en la rentabilidad, lo que refuerza la necesidad de una gestión estratégica del portafolio.</li>
+
+  <li>La baja adopción de métodos de pago digitales refleja una oportunidad de modernización operativa y mejora en la experiencia del cliente.</li>
+
+  <li>El comportamiento estacional indica que las decisiones comerciales deben alinearse con ciclos de demanda para maximizar resultados.</li>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section">
+      <div class="container">
+        <div class="project-grid-two">
+          <article class="case-card">
+            <h2>Impacto para el negocio</h2>
+            <ul class="insight-list">
+             <li>Mayor visibilidad sobre los productos y categorías que realmente impulsan la rentabilidad del negocio.</li>
+
+  <li>Detección de líneas deficitarias que generan pérdidas y afectan el margen global.</li>
+
+  <li>Identificación de dependencias geográficas que pueden representar riesgos operativos y comerciales.</li>
+
+  <li>Mejor comprensión del impacto del mix de productos en la rentabilidad total.</li>
+
+  <li>Base analítica sólida para la toma de decisiones estratégicas en pricing, portafolio y expansión.</li>
+            </ul>
+          </article>
+
+          <article class="case-card">
+            <h2>Recomendaciones</h2>
+            <ul class="insight-list">
+              <li><strong>Optimización del portafolio de productos:</strong> 
+  Reducir o reestructurar subcategorías con pérdidas (ej. Tables y Bookcases), revisando precios, costos o condiciones comerciales.</li>
+
+  <li><strong>Enfoque en productos de alto margen:</strong> 
+  Incrementar la inversión comercial en la categoría Tecnología, priorizando productos con alta rentabilidad.</li>
+
+  <li><strong>Gestión avanzada de clientes:</strong> 
+  Implementar segmentación basada en rentabilidad (Customer Lifetime Value) y no únicamente en volumen de compra.</li>
+
+  <li><strong>Estrategia de expansión geográfica:</strong> 
+  Replicar el modelo de éxito de la región Oeste en regiones con menor rendimiento para diversificar ingresos.</li>
+
+  <li><strong>Optimización del pricing:</strong> 
+  Aplicar estrategias de pricing dinámico para mejorar el margen en productos con alta demanda pero baja rentabilidad.</li>
+
+  <li><strong>Transformación de métodos de pago:</strong> 
+  Incentivar el uso de pagos digitales para reducir riesgos operativos y costos logísticos asociados al contra reembolso.</li>
+
+  <li><strong>Planificación basada en estacionalidad:</strong> 
+  Ajustar campañas de marketing, inventario y promociones en función de los picos de demanda del Q4.</li>
+
+  <li><strong>Optimización logística:</strong> 
+  Mantener el envío estándar como base operativa, incorporando opciones rápidas solo en productos premium o de alto margen.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section">
+      <div class="container">
+        <article class="case-card">
+          <h2>Entregables</h2>
+
+          <div class="deliverables">
+            <a class="btn btn--primary" 
+            href="https://github.com/sebastianflores-data/superstore-sales-analysis/blob/main/sql/superstore_analysis.sql" 
+            target="_blank" 
+            rel="noreferrer"> 💻Ver código SQL</a>
+            <a class="btn btn--ghost"
+            href="https://1drv.ms/x/c/ad2c5f57232f86ec/IQC3DoVoSVCNTZuV6ilBjV59AYvwwF6q6fnyWESYEhMaUPQ?e=4bdlKQ" 
+            target="_blank" 
+            rel="noreferrer">Ver dashboard</a>
+            <a class="btn btn--ghost" href="./index.html#projects">Volver a proyectos</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
