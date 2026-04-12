@@ -1577,3 +1577,16 @@ a:hover{ opacity: .9; }
   box-shadow: 0 8px 25px rgba(79, 103, 255, 0.13);
   transform: translateY(-2px);
 }
+/*---------------Boton CV----------*/
+.btn-cv {
+  background-color: #0b1220;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-cv:hover {
+  background-color: #1e293b;
+}
